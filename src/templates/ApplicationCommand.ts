@@ -5,6 +5,7 @@ import type {
   SlashCommandBuilder,
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
+import logger from '../logger.js';
 import type SubCommand from './SubCommand.js';
 
 /**
@@ -48,7 +49,7 @@ export default class ApplicationCommand {
             ).default as SubCommand;
             await command.execute(interaction);
           } catch (error) {
-            console.error(error);
+            logger.error(error);
             await interaction.reply({
               content: 'An error occured when attempting to execute that command!',
               ephemeral: true,

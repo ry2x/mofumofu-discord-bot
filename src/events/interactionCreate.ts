@@ -1,4 +1,5 @@
 import { BaseInteraction, Events } from 'discord.js';
+import logger from '../logger.js';
 import type ApplicationCommand from '../templates/ApplicationCommand.js';
 import Event from '../templates/Event.js';
 
@@ -16,7 +17,7 @@ export default new Event({
       )) as ApplicationCommand;
       await command.execute(interaction);
     } catch (error) {
-      console.error(error);
+      logger.error(error);
       await interaction.reply({
         content: 'There was an error while executing this command!',
         ephemeral: true,

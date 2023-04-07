@@ -1,4 +1,5 @@
 import { Events, Message } from 'discord.js';
+import logger from '../logger.js';
 import Event from '../templates/Event.js';
 import type MessageCommand from '../templates/MessageCommand.js';
 
@@ -37,7 +38,7 @@ export default new Event({
     try {
       await command.execute(message, args);
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   },
 });

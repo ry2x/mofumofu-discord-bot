@@ -1,4 +1,5 @@
 import { Events } from 'discord.js';
+import logger from '../logger.js';
 import Event from '../templates/Event.js';
 
 export default new Event({
@@ -6,6 +7,6 @@ export default new Event({
   once: true,
   execute(): void {
     // Runs when the bot logs in
-    console.log(`Logged in as ${client.user?.tag as string}!`);
+    logger.info(`Logged in as ${client.user?.tag as string}!`);
   },
 });

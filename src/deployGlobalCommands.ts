@@ -33,6 +33,6 @@ export default async function deployGlobalCommands() {
     });
     logger.info('---Successfully reloaded application (/) commands.---');
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 }
