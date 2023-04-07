@@ -1,0 +1,11 @@
+{
+    "extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "outDir": "./dist",
+        "module": "ESNext",
+        "moduleResolution": "nodenext",
+        "ignoreDeprecations": "5.0",
+        "target": "ES2021",
+    }
+}
