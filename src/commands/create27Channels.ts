@@ -2,6 +2,7 @@ import {
   CacheType,
   ChannelType,
   ChatInputCommandInteraction,
+  PermissionFlagsBits,
   SlashCommandBuilder,
 } from 'discord.js';
 import { flowers } from '../constant/flowers.js';
@@ -12,7 +13,7 @@ export default new ApplicationCommand({
   data: new SlashCommandBuilder()
     .setName('channel-flower-create')
     .setDescription('create channels named vary flowers')
-    .setDefaultMemberPermissions('permissions'),
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction): Promise<void> {
     await createChannel(interaction);
   },
@@ -21,6 +22,7 @@ export default new ApplicationCommand({
 async function createChannel(interaction: ChatInputCommandInteraction<CacheType>): Promise<void> {
   const guild = interaction.guild;
   if (!guild) return;
+  await interaction.deferReply();
 
   const names: flower[] = flowers;
 
@@ -55,4 +57,5 @@ async function createChannel(interaction: ChatInputCommandInteraction<CacheType>
         });
     });
   }
+  await interaction.followUp('end!');
 }
