@@ -20,7 +20,7 @@ const firstEmbed = new EmbedBuilder()
   .setTitle('I will delete the channels and roles from this server!')
   .setDescription('Starting process...');
 
-function makeEmbed(exitedItem: string) {
+function exitedEmbed(exitedItem: string) {
   return new EmbedBuilder()
     .setColor(Colors.Red)
     .setTitle('Flower ' + exitedItem + ' are already exists!')
@@ -41,13 +41,13 @@ async function createChannel(interaction: ChatInputCommandInteraction<CacheType>
 
   const channels = guild.channels.cache.filter((channel) => channel.name == checkName);
   if (channels.size >= 1) {
-    await message.edit({ embeds: [makeEmbed('channels')] });
+    await message.edit({ embeds: [exitedEmbed('channels')] });
     return;
   }
 
   const roles = guild.roles.cache.filter((role) => role.name == checkName);
   if (roles.size >= 1) {
-    await message.edit({ embeds: [makeEmbed('roles')] });
+    await message.edit({ embeds: [exitedEmbed('roles')] });
     return;
   }
 
