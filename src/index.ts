@@ -6,7 +6,7 @@ import { Client, GatewayIntentBits, Collection, Partials } from 'discord.js';
 import deployGlobalCommands from './deployGlobalCommands.js';
 import logger from './logger.js';
 import type ApplicationCommand from './templates/ApplicationCommand.js';
-import type ContextCommand from './templates/ContextCommnads.js';
+import type ContextCommand from './templates/ContextCommands.js';
 import type Event from './templates/Event.js';
 import type MessageCommand from './templates/MessageCommand.js';
 

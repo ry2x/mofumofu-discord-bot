@@ -4,7 +4,7 @@ import { REST } from '@discordjs/rest';
 import { RESTPostAPIApplicationCommandsJSONBody, Routes } from 'discord.js';
 import logger from './logger.js';
 import type ApplicationCommand from './templates/ApplicationCommand.js';
-import type ContextCommand from './templates/ContextCommnads.js';
+import type ContextCommand from './templates/ContextCommands.js';
 const { TOKEN, CLIENT_ID } = process.env;
 
 export default async function deployGlobalCommands() {

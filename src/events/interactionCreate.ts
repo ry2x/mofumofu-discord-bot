@@ -1,8 +1,9 @@
 import { BaseInteraction, Events } from 'discord.js';
 import logger from '../logger.js';
 import type ApplicationCommand from '../templates/ApplicationCommand.js';
-import type ContextCommand from '../templates/ContextCommnads.js';
+import type ContextCommand from '../templates/ContextCommands.js';
 import Event from '../templates/Event.js';
+import { interactionError } from '../utils/errorEmbed.js';
 
 export default new Event({
   name: Events.InteractionCreate,
@@ -29,10 +30,7 @@ export default new Event({
         await command.execute(interaction);
       } catch (error) {
         logger.error(error);
-        await interaction.reply({
-          content: 'There was an error while executing this command!',
-          ephemeral: true,
-        });
+        await interaction.reply(interactionError);
       }
     }
 
@@ -44,10 +42,7 @@ export default new Event({
         await command.execute(interaction);
       } catch (error) {
         logger.error(error);
-        await interaction.reply({
-          content: 'There was an error while executing this command!',
-          ephemeral: true,
-        });
+        await interaction.reply(interactionError);
       }
     }
   },

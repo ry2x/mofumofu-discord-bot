@@ -21,8 +21,8 @@ export default new SubCommand({
 function embedMaker(kind: 'role' | 'channel' | 'category', color: ColorResolvable, name: string) {
   return new EmbedBuilder()
     .setColor(color)
-    .setTitle(`Deleting ${kind} ...`)
-    .setDescription(`${kind}: ${name} : is deleting now...`);
+    .setTitle(`Deleting ${kind}s ...`)
+    .setDescription(`${kind}: ${name} : is been deleting now...`);
 }
 
 async function deleteChannel(interaction: ChatInputCommandInteraction<CacheType>): Promise<void> {
@@ -31,7 +31,7 @@ async function deleteChannel(interaction: ChatInputCommandInteraction<CacheType>
 
   const firstEmbed = new EmbedBuilder()
     .setColor(Colors.Red)
-    .setTitle('I will delete the channels and roles from this server!')
+    .setTitle('I will delete flower channels and roles from this server!')
     .setDescription('Starting process...');
   const message = await interaction.reply({ embeds: [firstEmbed], fetchReply: true });
 

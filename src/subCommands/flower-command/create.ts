@@ -4,6 +4,7 @@ import {
   EmbedBuilder,
   type ChatInputCommandInteraction,
   Colors,
+  PermissionFlagsBits,
 } from 'discord.js';
 import { flowers } from '../../constant/flowers.js';
 import SubCommand from '../../templates/SubCommand.js';
@@ -14,11 +15,6 @@ export default new SubCommand({
     await createChannel(interaction);
   },
 });
-
-const firstEmbed = new EmbedBuilder()
-  .setColor(Colors.Blue)
-  .setTitle('I will delete the channels and roles from this server!')
-  .setDescription('Starting process...');
 
 function exitedEmbed(exitedItem: string) {
   return new EmbedBuilder()
@@ -31,6 +27,10 @@ async function createChannel(interaction: ChatInputCommandInteraction<CacheType>
   const guild = interaction.guild;
   if (!guild) return;
 
+  const firstEmbed = new EmbedBuilder()
+    .setColor(Colors.Blue)
+    .setTitle('I will create flower channels and roles for this server!')
+    .setDescription('Starting process...');
   const message = await interaction.reply({ embeds: [firstEmbed], fetchReply: true });
 
   const names: flower[] = flowers;
@@ -72,11 +72,11 @@ async function createChannel(interaction: ChatInputCommandInteraction<CacheType>
           permissionOverwrites: [
             {
               id: guild.roles.everyone,
-              deny: ['ViewChannel'],
+              deny: [PermissionFlagsBits.ViewChannel],
             },
             {
               id: role.id,
-              allow: ['ViewChannel', 'Connect'],
+              allow: [PermissionFlagsBits.Connect, PermissionFlagsBits.ViewChannel],
             },
           ],
         })
