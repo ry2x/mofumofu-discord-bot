@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import type {
   ChatInputCommandInteraction,
-  ContextMenuCommandBuilder,
   SlashCommandBuilder,
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
@@ -12,19 +11,19 @@ import type SubCommand from './SubCommand.js';
  * Represents an Application Command
  */
 export default class ApplicationCommand {
-  data: SlashCommandBuilder | ContextMenuCommandBuilder | SlashCommandSubcommandsOnlyBuilder;
+  data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder;
   hasSubCommands: boolean;
   execute: (interaction: ChatInputCommandInteraction) => Promise<void> | void;
 
   /**
    * @param {{
-   *      data: SlashCommandBuilder | ContextMenuCommandBuilder | SlashCommandSubcommandsOnlyBuilder
+   *      data: SlashCommandBuilder  | SlashCommandSubcommandsOnlyBuilder
    *      hasSubCommands?: boolean
    *      execute?: (interaction: ChatInputCommandInteraction) => Promise<void> | void
    *  }} options - The options for the slash command
    */
   constructor(options: {
-    data: SlashCommandBuilder | ContextMenuCommandBuilder | SlashCommandSubcommandsOnlyBuilder;
+    data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder;
     hasSubCommands?: boolean;
     execute?: (interaction: ChatInputCommandInteraction) => Promise<void> | void;
   }) {

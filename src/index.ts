@@ -6,6 +6,7 @@ import { Client, GatewayIntentBits, Collection, Partials } from 'discord.js';
 import deployGlobalCommands from './deployGlobalCommands.js';
 import logger from './logger.js';
 import type ApplicationCommand from './templates/ApplicationCommand.js';
+import type ContextCommand from './templates/ContextCommnads.js';
 import type Event from './templates/Event.js';
 import type MessageCommand from './templates/MessageCommand.js';
 
@@ -31,6 +32,7 @@ global.client = Object.assign(
   {
     commands: new Collection<string, ApplicationCommand>(),
     msgCommands: new Collection<string, MessageCommand>(),
+    contextCommands: new Collection<string, ContextCommand>(),
   }
 );
 
@@ -54,6 +56,15 @@ for (const file of msgCommandFiles) {
   const command: MessageCommand = (await import(`./messageCommands/${file}`))
     .default as MessageCommand;
   client.msgCommands.set(command.name, command);
+}
+
+const contextCommandFiles: string[] = readdirSync('./contextCommands').filter(
+  (file) => file.endsWith('.js') || file.endsWith('.ts')
+);
+for (const file of contextCommandFiles) {
+  const command: ContextCommand = (await import(`./contextCommands/${file}`))
+    .default as ContextCommand;
+  client.contextCommands.set(command.data.name, command);
 }
 
 // Event handling

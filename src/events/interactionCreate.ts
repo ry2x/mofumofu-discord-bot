@@ -1,27 +1,54 @@
 import { BaseInteraction, Events } from 'discord.js';
 import logger from '../logger.js';
 import type ApplicationCommand from '../templates/ApplicationCommand.js';
+import type ContextCommand from '../templates/ContextCommnads.js';
 import Event from '../templates/Event.js';
 
 export default new Event({
   name: Events.InteractionCreate,
   async execute(interaction: BaseInteraction): Promise<void> {
     // Dynamically handle slash commands
-    if (!interaction.isChatInputCommand()) return;
+    if (
+      !(
+        interaction.isChatInputCommand() ||
+        interaction.isButton() ||
+        interaction.isContextMenuCommand()
+      )
+    )
+      return;
 
-    if (!client.commands.has(interaction.commandName)) return;
+    if (interaction.isButton()) {
+      return;
+    }
 
-    try {
-      const command: ApplicationCommand = (await client.commands.get(
-        interaction.commandName
-      )) as ApplicationCommand;
-      await command.execute(interaction);
-    } catch (error) {
-      logger.error(error);
-      await interaction.reply({
-        content: 'There was an error while executing this command!',
-        ephemeral: true,
-      });
+    if (interaction.isContextMenuCommand()) {
+      try {
+        const command: ContextCommand = (await client.contextCommands.get(
+          interaction.commandName
+        )) as ContextCommand;
+        await command.execute(interaction);
+      } catch (error) {
+        logger.error(error);
+        await interaction.reply({
+          content: 'There was an error while executing this command!',
+          ephemeral: true,
+        });
+      }
+    }
+
+    if (interaction.isChatInputCommand()) {
+      try {
+        const command: ApplicationCommand = (await client.commands.get(
+          interaction.commandName
+        )) as ApplicationCommand;
+        await command.execute(interaction);
+      } catch (error) {
+        logger.error(error);
+        await interaction.reply({
+          content: 'There was an error while executing this command!',
+          ephemeral: true,
+        });
+      }
     }
   },
 });

@@ -6,6 +6,7 @@ import MessageCommand from '../templates/MessageCommand';
 interface DiscordClient extends Client {
   commands: Collection<string, ApplicationCommand>;
   msgCommands: Collection<string, MessageCommand>;
+  contextCommands: Collection<string, ContextCommand>;
 }
 
 declare global {

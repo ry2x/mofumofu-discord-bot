@@ -4,6 +4,7 @@ import { REST } from '@discordjs/rest';
 import { RESTPostAPIApplicationCommandsJSONBody, Routes } from 'discord.js';
 import logger from './logger.js';
 import type ApplicationCommand from './templates/ApplicationCommand.js';
+import type ContextCommand from './templates/ContextCommnads.js';
 const { TOKEN, CLIENT_ID } = process.env;
 
 export default async function deployGlobalCommands() {
@@ -17,6 +18,16 @@ export default async function deployGlobalCommands() {
   for (const file of commandFiles) {
     const command: ApplicationCommand = (await import(`./commands/${file}`))
       .default as ApplicationCommand;
+    const commandData = command.data.toJSON();
+    commands.push(commandData);
+  }
+
+  const contextCommandFiles: string[] = readdirSync('./contextCommands').filter(
+    (file) => file.endsWith('.js') || file.endsWith('.ts')
+  );
+  for (const file of contextCommandFiles) {
+    const command: ContextCommand = (await import(`./contextCommands/${file}`))
+      .default as ContextCommand;
     const commandData = command.data.toJSON();
     commands.push(commandData);
   }
