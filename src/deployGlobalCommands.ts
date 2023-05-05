@@ -16,17 +16,17 @@ export default async function deployGlobalCommands() {
   );
 
   for (const file of commandFiles) {
-    const command: ApplicationCommand = (await import(`./commands/${file}`))
+    const command: ApplicationCommand = (await import(`.interactions/commands/${file}`))
       .default as ApplicationCommand;
     const commandData = command.data.toJSON();
     commands.push(commandData);
   }
 
-  const contextCommandFiles: string[] = readdirSync('./contextCommands').filter(
+  const contextCommandFiles: string[] = readdirSync('.interactions/contextCommands').filter(
     (file) => file.endsWith('.js') || file.endsWith('.ts')
   );
   for (const file of contextCommandFiles) {
-    const command: ContextCommand = (await import(`./contextCommands/${file}`))
+    const command: ContextCommand = (await import(`.interactions/contextCommands/${file}`))
       .default as ContextCommand;
     const commandData = command.data.toJSON();
     commands.push(commandData);

@@ -1,5 +1,5 @@
 import { ApplicationCommandType, ContextMenuCommandBuilder, PermissionFlagsBits } from 'discord.js';
-import ContextCommand from '../templates/ContextCommnads.js';
+import ContextCommand from '../../templates/ContextCommnads.js';
 
 export default new ContextCommand({
   data: new ContextMenuCommandBuilder()

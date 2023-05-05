@@ -40,13 +40,23 @@ global.client = Object.assign(
 logger.info(
   'Set each command in the commands folder as a command in the client.commands collection'
 );
+
 const commandFiles: string[] = readdirSync('./commands').filter(
   (file) => file.endsWith('.js') || file.endsWith('.ts')
 );
 for (const file of commandFiles) {
-  const command: ApplicationCommand = (await import(`./commands/${file}`))
+  const command: ApplicationCommand = (await import(`.interactions/commands/${file}`))
     .default as ApplicationCommand;
   client.commands.set(command.data.name, command);
+}
+
+const contextCommandFiles: string[] = readdirSync('.interactions/contextCommands').filter(
+  (file) => file.endsWith('.js') || file.endsWith('.ts')
+);
+for (const file of contextCommandFiles) {
+  const command: ContextCommand = (await import(`.interactions/contextCommands/${file}`))
+    .default as ContextCommand;
+  client.contextCommands.set(command.data.name, command);
 }
 
 const msgCommandFiles: string[] = readdirSync('./messageCommands').filter(
@@ -56,15 +66,6 @@ for (const file of msgCommandFiles) {
   const command: MessageCommand = (await import(`./messageCommands/${file}`))
     .default as MessageCommand;
   client.msgCommands.set(command.name, command);
-}
-
-const contextCommandFiles: string[] = readdirSync('./contextCommands').filter(
-  (file) => file.endsWith('.js') || file.endsWith('.ts')
-);
-for (const file of contextCommandFiles) {
-  const command: ContextCommand = (await import(`./contextCommands/${file}`))
-    .default as ContextCommand;
-  client.contextCommands.set(command.data.name, command);
 }
 
 // Event handling
