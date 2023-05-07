@@ -8,7 +8,7 @@ import type ContextCommand from './templates/ContextCommands.js';
 const { TOKEN, CLIENT_ID } = process.env;
 
 export default async function deployGlobalCommands() {
-  logger.info('----starting global commands deployment----');
+  logger.info('*Start creating global commands');
 
   const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
   const commandFiles: string[] = readdirSync('./interactions/commands').filter(
@@ -32,17 +32,17 @@ export default async function deployGlobalCommands() {
     commands.push(commandData);
   }
 
-  logger.info('---Pushed application commands---');
+  logger.info('**Created global commands');
 
   const rest = new REST({ version: '10' }).setToken(TOKEN as string);
 
   try {
-    logger.info('---Starting refreshing application (/) commands.---');
+    logger.info('*Start refreshing slash (/) commands');
 
     await rest.put(Routes.applicationCommands(CLIENT_ID as string), {
       body: commands,
     });
-    logger.info('---Successfully reloaded application (/) commands.---');
+    logger.info('**Finish refreshing slash (/) commands');
   } catch (error) {
     logger.error(error);
   }

@@ -13,14 +13,15 @@ import type MessageCommand from './templates/MessageCommand.js';
 
 const { TOKEN } = process.env;
 
-logger.info('----Starting bot----');
+logger.info('*Start deployment');
 
 await deployGlobalCommands();
 
-logger.info('----finish deploy global commands----');
+logger.info('**Finish deployment');
 
 // Discord client object
-logger.info('Create Discord Client...');
+logger.info('*Creating discord client');
+
 global.client = Object.assign(
   new Client({
     intents: [
@@ -39,9 +40,7 @@ global.client = Object.assign(
 );
 
 // Set each command in the commands folder as a command in the client.commands collection
-logger.info(
-  'Set each command in the commands folder as a command in the client.commands collection'
-);
+logger.info('*Set commands to client');
 
 const commandFiles: string[] = readdirSync('./interactions/commands').filter(
   (file) => file.endsWith('.js') || file.endsWith('.ts')
@@ -79,8 +78,10 @@ for (const file of msgCommandFiles) {
   client.msgCommands.set(command.name, command);
 }
 
+logger.info('**Finish setting commands');
+
 // Event handling
-logger.info('Create Event Handler...');
+logger.info('*Creating events');
 const eventFiles: string[] = readdirSync('./events').filter(
   (file) => file.endsWith('.js') || file.endsWith('.ts')
 );
@@ -94,5 +95,8 @@ for (const file of eventFiles) {
   }
 }
 
+logger.info('**Finish creating events');
+logger.info('**Finish creating discord client');
+
 await client.login(TOKEN);
-logger.info('Bot logged in!');
+logger.info(':Bot logged in!:');
