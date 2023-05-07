@@ -1,6 +1,6 @@
 import type { ButtonInteraction } from 'discord.js';
 
-export default class ButtonCommands {
+export default class ButtonCommand {
   data: {
     name: string;
   };
@@ -9,7 +9,7 @@ export default class ButtonCommands {
   /**
    * @param {{
    *    data: {
-   *      name: string
+   *      name: string;
    *    },
    *    execute?: (interaction: ButtonInteraction) => Promise<void> | void;
    *  }} - options

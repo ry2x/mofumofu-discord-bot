@@ -8,7 +8,7 @@ import logger from '../logger.js';
 import type SubCommand from './SubCommand.js';
 
 /**
- * Represents an Application Command
+ * Represents an Slash Command
  */
 export default class ApplicationCommand {
   data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder;

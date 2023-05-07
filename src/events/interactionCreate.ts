@@ -1,6 +1,7 @@
 import { BaseInteraction, Events } from 'discord.js';
 import logger from '../logger.js';
 import type ApplicationCommand from '../templates/ApplicationCommand.js';
+import type ButtonCommand from '../templates/ButtonCommands.js';
 import type ContextCommand from '../templates/ContextCommands.js';
 import Event from '../templates/Event.js';
 import { interactionError } from '../utils/errorEmbed.js';
@@ -8,7 +9,7 @@ import { interactionError } from '../utils/errorEmbed.js';
 export default new Event({
   name: Events.InteractionCreate,
   async execute(interaction: BaseInteraction): Promise<void> {
-    // Dynamically handle slash commands
+    // Dynamic interaction handling
     if (
       !(
         interaction.isChatInputCommand() ||
@@ -19,7 +20,15 @@ export default new Event({
       return;
 
     if (interaction.isButton()) {
-      return;
+      try {
+        const command: ButtonCommand = client.buttonCommands.get(
+          interaction.customId
+        ) as ButtonCommand;
+        await command.execute(interaction);
+      } catch (error) {
+        logger.error(error);
+        await interaction.reply(interactionError);
+      }
     }
 
     if (interaction.isContextMenuCommand()) {
