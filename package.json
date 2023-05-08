@@ -18,7 +18,7 @@
         "@discordjs/rest": "^1.0.1",
         "discord.js": "^14.10.2",
         "dotenv": "^16.0.1",
-        "pino": "^8.12.1",
+        "pino": "^8.14.1",
         "pino-pretty": "^10.0.0"
     },
     "devDependencies": {
