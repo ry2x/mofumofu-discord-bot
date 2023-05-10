@@ -1,4 +1,4 @@
-import { Events, Message } from 'discord.js';
+import { Events, Message, PermissionFlagsBits } from 'discord.js';
 import logger from '../logger.js';
 import Event from '../templates/Event.js';
 import type MessageCommand from '../templates/MessageCommand.js';
@@ -21,6 +21,8 @@ export default new Event({
 
     // fetches the application owner for the bot
     if (!client.application?.owner) await client.application?.fetch();
+
+    if (!message.member?.permissions.has(PermissionFlagsBits.Administrator) ?? false) return;
 
     // get the arguments and the actual command name for the inputted command
     const args = message.content.slice(prefix.length).trim().split(/ +/);
