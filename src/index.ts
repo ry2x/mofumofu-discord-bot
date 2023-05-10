@@ -29,6 +29,7 @@ global.client = Object.assign(
       GatewayIntentBits.GuildMessages,
       GatewayIntentBits.DirectMessages,
       GatewayIntentBits.MessageContent,
+      GatewayIntentBits.DirectMessages,
     ],
     partials: [Partials.Channel],
   }),
