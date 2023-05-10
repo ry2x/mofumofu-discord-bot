@@ -19,8 +19,6 @@ export default new ButtonCommand({
 });
 
 async function pong(interaction: ButtonInteraction<CacheType>) {
-  await interaction.deferUpdate();
-
   const pingEmbed = new EmbedBuilder()
     .setTitle('You say Ping!')
     .setColor(Colors.Green)
