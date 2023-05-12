@@ -11,22 +11,22 @@ export default async function deployGlobalCommands() {
   logger.info('*Start creating global commands');
 
   const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
-  const commandFiles: string[] = readdirSync('./interactions/commands').filter(
+  const commandFiles: string[] = readdirSync('./commands/slashCommands').filter(
     (file) => file.endsWith('.js') || file.endsWith('.ts')
   );
 
   for (const file of commandFiles) {
-    const command: ApplicationCommand = (await import(`./interactions/commands/${file}`))
+    const command: ApplicationCommand = (await import(`./commands/slashCommands/${file}`))
       .default as ApplicationCommand;
     const commandData = command.data.toJSON();
     commands.push(commandData);
   }
 
-  const contextCommandFiles: string[] = readdirSync('./interactions/contextCommands').filter(
+  const contextCommandFiles: string[] = readdirSync('./commands/contextCommands').filter(
     (file) => file.endsWith('.js') || file.endsWith('.ts')
   );
   for (const file of contextCommandFiles) {
-    const command: ContextCommand = (await import(`./interactions/contextCommands/${file}`))
+    const command: ContextCommand = (await import(`./commands/contextCommands/${file}`))
       .default as ContextCommand;
     const commandData = command.data.toJSON();
     commands.push(commandData);

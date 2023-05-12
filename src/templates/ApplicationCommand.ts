@@ -41,7 +41,7 @@ export default class ApplicationCommand {
           try {
             const command: SubCommand = (
               await import(
-                `../subCommands/${this.data.name}/${
+                `../commands/slashCommands/subCommands/${this.data.name}/${
                   subCommandGroup ? `${subCommandGroup}/` : ''
                 }${commandName}.js`
               )

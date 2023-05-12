@@ -44,29 +44,29 @@ global.client = Object.assign(
 // Set each command in the commands folder as a command in the client.commands collection
 logger.info('*Set commands to client');
 
-const commandFiles: string[] = readdirSync('./interactions/commands').filter(
+const commandFiles: string[] = readdirSync('./commands/slashCommands').filter(
   (file) => file.endsWith('.js') || file.endsWith('.ts')
 );
 for (const file of commandFiles) {
-  const command: ApplicationCommand = (await import(`./interactions/commands/${file}`))
+  const command: ApplicationCommand = (await import(`./commands/slashCommands/${file}`))
     .default as ApplicationCommand;
   client.commands.set(command.data.name, command);
 }
 
-const contextCommandFiles: string[] = readdirSync('./interactions/contextCommands').filter(
+const contextCommandFiles: string[] = readdirSync('./commands/contextCommands').filter(
   (file) => file.endsWith('.js') || file.endsWith('.ts')
 );
 for (const file of contextCommandFiles) {
-  const command: ContextCommand = (await import(`./interactions/contextCommands/${file}`))
+  const command: ContextCommand = (await import(`./commands/contextCommands/${file}`))
     .default as ContextCommand;
   client.contextCommands.set(command.data.name, command);
 }
 
-const buttonCommandFiles: string[] = readdirSync('./interactions/buttonCommands').filter(
+const buttonCommandFiles: string[] = readdirSync('./commands/buttonCommands').filter(
   (file) => file.endsWith('.js') || file.endsWith('.ts')
 );
 for (const file of buttonCommandFiles) {
-  const command: ButtonCommand = (await import(`./interactions/buttonCommands/${file}`))
+  const command: ButtonCommand = (await import(`./commands/buttonCommands/${file}`))
     .default as ButtonCommand;
   client.buttonCommands.set(command.data.name, command);
 }
