@@ -71,11 +71,11 @@ for (const file of buttonCommandFiles) {
   client.buttonCommands.set(command.data.name, command);
 }
 
-const msgCommandFiles: string[] = readdirSync('./messageCommands').filter(
+const msgCommandFiles: string[] = readdirSync('./commands/messageCommands').filter(
   (file) => file.endsWith('.js') || file.endsWith('.ts')
 );
 for (const file of msgCommandFiles) {
-  const command: MessageCommand = (await import(`./messageCommands/${file}`))
+  const command: MessageCommand = (await import(`./commands/messageCommands/${file}`))
     .default as MessageCommand;
   client.msgCommands.set(command.name, command);
 }
