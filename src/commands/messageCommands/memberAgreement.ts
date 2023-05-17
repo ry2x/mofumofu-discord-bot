@@ -6,7 +6,7 @@ import {
   EmbedBuilder,
   PermissionFlagsBits,
 } from 'discord.js';
-import MessageCommand from '../templates/MessageCommand.js';
+import MessageCommand from '../../templates/MessageCommand.js';
 
 export default new MessageCommand({
   name: 'member-agreement',

@@ -8,9 +8,9 @@ import {
   Role,
   GuildBasedChannel,
 } from 'discord.js';
-import { flowers } from '../../constant/flowers.js';
-import SubCommand from '../../templates/SubCommand.js';
-import type { flower } from '../../types.js';
+import { flowers } from '../../../../constant/flowers.js';
+import SubCommand from '../../../../templates/SubCommand.js';
+import type { flower } from '../../../../types.js';
 
 export default new SubCommand({
   async execute(interaction: ChatInputCommandInteraction): Promise<void> {

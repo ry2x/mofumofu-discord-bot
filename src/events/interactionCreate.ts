@@ -10,14 +10,6 @@ export default new Event({
   name: Events.InteractionCreate,
   async execute(interaction: BaseInteraction): Promise<void> {
     // Dynamic interaction handling
-    if (
-      !(
-        interaction.isChatInputCommand() ||
-        interaction.isButton() ||
-        interaction.isContextMenuCommand()
-      )
-    )
-      return;
 
     if (interaction.isButton()) {
       try {
@@ -54,5 +46,7 @@ export default new Event({
         await interaction.reply(interactionError);
       }
     }
+
+    return;
   },
 });
