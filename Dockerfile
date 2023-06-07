@@ -6,3 +6,5 @@ COPY . /usr/app/
 RUN yarn install --prod --frozen-lockfile
 
 RUN yarn run build
+
+CMD yarn run start
