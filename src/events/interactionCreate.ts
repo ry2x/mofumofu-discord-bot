@@ -47,6 +47,17 @@ export default new Event({
       }
     }
 
+    if (interaction.isAutocomplete()) {
+      try {
+        const command: ApplicationCommand = (await client.commands.get(
+          interaction.commandName
+        )) as ApplicationCommand;
+        await command.complete(interaction);
+      } catch (error) {
+        logger.error(error);
+      }
+    }
+
     return;
   },
 });
