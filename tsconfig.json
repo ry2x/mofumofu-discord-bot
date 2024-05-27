@@ -1,11 +1,27 @@
 {
-    "extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
-    "compilerOptions": {
-        "resolveJsonModule": true,
-        "outDir": "./dist",
-        "module": "ESNext",
-        "moduleResolution": "nodenext",
-        "ignoreDeprecations": "5.0",
-        "target": "ES2021",
-    }
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "ignoreDeprecations": "5.0",
+    "target": "ES2021",
+    "lib": ["es2021"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "checkJs": true,
+    "verbatimModuleSyntax": true
+  }
 }
