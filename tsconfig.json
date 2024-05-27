@@ -22,6 +22,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "checkJs": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": false
   }
 }
