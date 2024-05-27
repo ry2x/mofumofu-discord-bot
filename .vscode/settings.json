@@ -4,5 +4,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "cSpell.words": ["nodenext", "pino"]
+  "cSpell.words": ["mofu", "nodenext", "pino"]
 }

@@ -12,8 +12,7 @@
     "compile": "tsc",
     "copy": "cp src/.env dist",
     "build": "yarn run compile && yarn run copy",
-    "start": "cd ./dist && node index.js",
-    "test": "cd ./src && ts-node --esm --files index.ts"
+    "start": "cd ./dist && node index.js"
   },
   "dependencies": {
     "@discordjs/rest": "^2.3.0",
