@@ -38,14 +38,14 @@ global.client = Object.assign(
     msgCommands: new Collection<string, MessageCommand>(),
     contextCommands: new Collection<string, ContextCommand>(),
     buttonCommands: new Collection<string, ButtonCommand>(),
-  }
+  },
 );
 
 // Set each command in the commands folder as a command in the client.commands collection
 logger.info('*Set commands to client');
 
 const commandFiles: string[] = readdirSync('./commands/slashCommands').filter(
-  (file) => file.endsWith('.js') || file.endsWith('.ts')
+  (file) => file.endsWith('.js') || file.endsWith('.ts'),
 );
 for (const file of commandFiles) {
   const command: ApplicationCommand = (await import(`./commands/slashCommands/${file}`))
@@ -54,7 +54,7 @@ for (const file of commandFiles) {
 }
 
 const contextCommandFiles: string[] = readdirSync('./commands/contextCommands').filter(
-  (file) => file.endsWith('.js') || file.endsWith('.ts')
+  (file) => file.endsWith('.js') || file.endsWith('.ts'),
 );
 for (const file of contextCommandFiles) {
   const command: ContextCommand = (await import(`./commands/contextCommands/${file}`))
@@ -63,7 +63,7 @@ for (const file of contextCommandFiles) {
 }
 
 const buttonCommandFiles: string[] = readdirSync('./commands/buttonCommands').filter(
-  (file) => file.endsWith('.js') || file.endsWith('.ts')
+  (file) => file.endsWith('.js') || file.endsWith('.ts'),
 );
 for (const file of buttonCommandFiles) {
   const command: ButtonCommand = (await import(`./commands/buttonCommands/${file}`))
@@ -72,7 +72,7 @@ for (const file of buttonCommandFiles) {
 }
 
 const msgCommandFiles: string[] = readdirSync('./commands/messageCommands').filter(
-  (file) => file.endsWith('.js') || file.endsWith('.ts')
+  (file) => file.endsWith('.js') || file.endsWith('.ts'),
 );
 for (const file of msgCommandFiles) {
   const command: MessageCommand = (await import(`./commands/messageCommands/${file}`))
@@ -85,15 +85,25 @@ logger.info('**Finish setting commands');
 // Event handling
 logger.info('*Creating events');
 const eventFiles: string[] = readdirSync('./events').filter(
-  (file) => file.endsWith('.js') || file.endsWith('.ts')
+  (file) => file.endsWith('.js') || file.endsWith('.ts'),
 );
 
 for (const file of eventFiles) {
   const event: Event = (await import(`./events/${file}`)).default as Event;
   if (event.once) {
-    client.once(event.name, (...args) => event.execute(...args));
+    client.once(
+      event.name,
+      (...args) =>
+        async () =>
+          await event.execute(...args),
+    );
   } else {
-    client.on(event.name, (...args) => event.execute(...args));
+    client.on(
+      event.name,
+      (...args) =>
+        async () =>
+          await event.execute(...args),
+    );
   }
 }
 

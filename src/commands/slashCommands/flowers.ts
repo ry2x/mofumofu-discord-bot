@@ -13,12 +13,12 @@ export default new ApplicationCommand({
     .addSubcommand(
       new SlashCommandSubcommandBuilder()
         .setName('create')
-        .setDescription('Create flower channels and roles')
+        .setDescription('Create flower channels and roles'),
     )
     .addSubcommand(
       new SlashCommandSubcommandBuilder()
         .setName('delete')
-        .setDescription('Delete flower channels and roles')
+        .setDescription('Delete flower channels and roles'),
     ),
   hasSubCommands: true,
 });

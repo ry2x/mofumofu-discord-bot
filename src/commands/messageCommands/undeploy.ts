@@ -14,7 +14,7 @@ export default new MessageCommand({
 
     if (!args[0]) {
       await message.reply(
-        `Incorrect number of arguments! The correct format is \`${prefix}undeploy <guild/global>\``
+        `Incorrect number of arguments! The correct format is \`${prefix}undeploy <guild/global>\``,
       );
       return;
     }

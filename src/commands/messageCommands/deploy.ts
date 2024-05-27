@@ -24,7 +24,7 @@ export default new MessageCommand({
 
     if (!args[0]) {
       await message.reply(
-        `Incorrect number of arguments! The correct format is \`${prefix}deploy <guild/global>\``
+        `Incorrect number of arguments! The correct format is \`${prefix}deploy <guild/global>\``,
       );
       return;
     }
@@ -34,7 +34,7 @@ export default new MessageCommand({
 
       const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
       const commandFiles: string[] = readdirSync('./commands').filter(
-        (file) => file.endsWith('.js') || file.endsWith('.ts')
+        (file) => file.endsWith('.js') || file.endsWith('.ts'),
       );
 
       for (const file of commandFiles) {
@@ -64,7 +64,7 @@ export default new MessageCommand({
 
       const commands: RESTPostAPIApplicationCommandsJSONBody[] = [];
       const commandFiles: string[] = readdirSync('./commands').filter(
-        (file) => file.endsWith('.js') || file.endsWith('.ts')
+        (file) => file.endsWith('.js') || file.endsWith('.ts'),
       );
 
       for (const file of commandFiles) {

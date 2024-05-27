@@ -31,7 +31,7 @@ export default new Event({
     const command =
       (client.msgCommands.get(commandName) as MessageCommand) ||
       (client.msgCommands.find(
-        (cmd: MessageCommand): boolean => cmd.aliases && cmd.aliases.includes(commandName)
+        (cmd: MessageCommand): boolean => cmd.aliases && cmd.aliases.includes(commandName),
       ) as MessageCommand);
 
     // dynamic command handling
